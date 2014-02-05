@@ -12,10 +12,13 @@
 					BreakingNew item= news.get(i); 
 					 %>
 					 <div class="news">
+					 <a href=<%=item.getUrl() %> target="_blank">
 					 <img src="<%=item.getImageUrl()%>" alt="<%=item.getImageUrl()%>" />
+					
 					 <br></br>
-					<h5><a href="#"><%=item.getTitle()%></a></h5>
+					<b><%=item.getTitle()%></b>
 					<p><%=item.getSubTitle()%></p>
+					 </a>
 				</div>
 					 <%}%>
 					

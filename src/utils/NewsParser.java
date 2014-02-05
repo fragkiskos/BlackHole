@@ -23,9 +23,10 @@ public class NewsParser {
 			List<String> images = getImages(content);
 			List<String> titles = getTitles(content);
 			List<String> subtitles = getSubTitles(content);
+			List<String> urls = getUrls(content);
 			List<BreakingNew> news = new ArrayList<BreakingNew>();
 			for(int i=0;i<NUM_OF_NEWS;i++){
-				BreakingNew breakingNew = new BreakingNew(titles.get(i), subtitles.get(i), images.get(i)); 
+				BreakingNew breakingNew = new BreakingNew(titles.get(i), subtitles.get(i), images.get(i),urls.get(i)); 
 				news.add(breakingNew);
 			}
 			return news;
@@ -49,6 +50,23 @@ public class NewsParser {
 		  i++;
 		}
 		return images;
+	}
+	
+	private static List<String> getUrls(Element content){
+		Elements links = content.getElementsByClass("article-image");
+		int i=0;
+		List<String> urls = new ArrayList<String>();
+		for (Element link : links) {
+		  String imageUrl = link.attr("href");
+		  if(!urls.contains(imageUrl)){
+			  urls.add(imageUrl);
+			  if(i==NUM_OF_NEWS-1){
+				  break;
+			  }
+			  i++;
+			}
+		}
+		return urls;
 	}
 	
 	private static List<String> getTitles(Element content){

@@ -18,6 +18,7 @@ public class Dokimi extends HttpServlet{
 		 System.out.println("ok");
 		 System.out.print(LanguageParsing.getValue("latestNews"));
 		 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-		    view.forward(request, response);
+		   // view.forward(request, response);
+		    response.getWriter().print("all right");
 	 }
 }
