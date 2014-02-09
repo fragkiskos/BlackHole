@@ -8,7 +8,8 @@
 				
 				
 					<%List<BreakingNew> news = NewsParser.getBreakingNews();
-					  for(int i=0;i<news.size();i++){
+					if(news!=null){  
+					for(int i=0;i<news.size();i++){
 					BreakingNew item= news.get(i); 
 					 %>
 					 <div class="news">
@@ -21,7 +22,9 @@
 					 </a>
 				</div>
 					 <%}%>
-					
+					 <%}else{%>
+					 <div>Sorry service temporary unavailable</div>
+					<%}%>
 				
 				
 				

@@ -1,0 +1,69 @@
+
+
+Table: call_for_buy
+Columns:
+id	int(11) PK 
+callerId	varchar(45) 
+date	datetime 
+panelId	varchar(45) 
+shareId	int(11) 
+
+Table: call_for_sale
+Columns:
+id	int(11) PK 
+callerId	int(11) 
+Date	datetime 
+panelId	int(11) 
+shareId	int(11)
+
+Table: exchange
+Columns:
+id	int(11) PK AI
+date	datetime 
+shareId	int(11) 
+sellerId	int(11) 
+buyerId	int(11) 
+price	double 
+selled_shares_Number
+
+Table: exchangePanel
+Columns:
+id	int(11) PK AI
+isclosed	bit(1) 
+shareId	int(11) 
+createdDate	datetime 
+closedDate	datetime 
+
+
+Table: panel_buyers
+Columns:
+id	int(11) PK 
+userId	int(11) 
+panelId	int(11) 
+
+Table: panel_exchanges
+Columns:
+id	int(11) PK AI
+exchangeId	int(11) 
+panelId	int(11) 
+
+Table: panel_sellers
+Columns:
+id	int(11) PK AI
+panelId	int(11) 
+userId	int(11) 
+
+Table: panel_share_negotiations
+Columns:
+id	int(11) PK AI
+panelId	int(11) 
+share_negotiationId	int(11) 
+
+Table: shareΝegotiation
+Columns:
+id	int(11) PK AI
+userId	int(11) 
+shareId	int(11) 
+new_price	double 
+old_price	double 
+date	datetime 

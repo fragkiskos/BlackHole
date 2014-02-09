@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="User" table="User">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="username" type="java.lang.String" column="username"/>
+       <property name="email" type="java.lang.String" column="email"/>
+       <property name="name" type="java.lang.String" column="name"/>
+       <property name="sirname" type="java.lang.String" column="sirname"/>
+       <property name="phone" type="java.lang.String" column="phone"/>
+       <property name="loginService" type="java.lang.String" column="loginService"/>
+       <property name="locked" type="java.lang.Boolean" column="locked"/>
+       <property name="password" type="java.lang.String" column="password"/>
+       <property name="passQuestion" type="java.lang.String" column="passQuestion"/>
+       <property name="passAnswer" type="java.lang.String" column="passAnswer"/>
+       <property name="frankos" type="java.lang.Double" column="frankos"/>
+       <property name="active" type="java.lang.Boolean" column="active"/>
+       <property name="InsertedDate" type="java.util.Date" column="InsertedDate"/>
+       <property name="deactivateDate" type="java.util.Date" column="deactivateDate"/>
+    </class>
+    
+
+
+</hibernate-mapping>

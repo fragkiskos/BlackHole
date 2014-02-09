@@ -18,7 +18,7 @@ public class NewsParser {
 	
 	public static List<BreakingNew> getBreakingNews(){
 		try {
-			Document doc = Jsoup.connect(URL).get();
+			Document doc = Jsoup.connect(URL).timeout(1000).get();
 			Element content = doc.getElementById("section-stories-container");
 			List<String> images = getImages(content);
 			List<String> titles = getTitles(content);

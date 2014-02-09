@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="Share" table="share">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="name" type="java.lang.String" column="name"/>
+       <property name="price" type="java.lang.Double" column="price"/>
+       <property name="insertedDate" type="java.util.Date" column="insertedDate"/>
+       <property name="active" type="java.lang.Boolean" column="active"/>
+       <property name="activateDate" type="java.util.Date" column="activateDate"/>
+       <property name="deactivateDate" type="java.util.Date" column="deactivateDate"/>
+       
+    </class>
+    
+
+
+</hibernate-mapping>

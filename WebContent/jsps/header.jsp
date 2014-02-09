@@ -26,6 +26,7 @@
 </head>
 <body>
 	<div id="bg">
+	<div style="background-color:gray;">menu</div>
 		<div class="wrap">
 			
 			<!-- logo -->
@@ -35,14 +36,14 @@
 			<!-- menu -->
 			<div id="mainmenu">
 				<ul id="menu">
-					<li><a class="current" href="jsps/index.jsp"><%=LanguageParsing.getValue("home") %></a></li>
+					<li><a class="current" href="index.jsp"><%=LanguageParsing.getValue("home") %></a></li>
 					<li><a href="inner.jsp"><%=LanguageParsing.getValue("actions") %></a>
-						<ul><li><a href="jsps/inner.jsp"><%=LanguageParsing.getValue("buy") %></a></li><li><a href="jsps/inner.jsp"><%=LanguageParsing.getValue("sell") %></a></li></ul>
+						<ul><li><a href="inner.jsp"><%=LanguageParsing.getValue("buy") %></a></li><li><a href="inner.jsp"><%=LanguageParsing.getValue("sell") %></a></li></ul>
 					</li>
-					<li><a href="jsps/portfolio.jsp"><%=LanguageParsing.getValue("statistics") %></a></li>
-					<li><a href="jsps/about.jsp"><%=LanguageParsing.getValue("about") %></a></li>
-					<li><a href="jsps/contact.jsp"><%=LanguageParsing.getValue("contact") %></a></li>
-					<li><a href="jsps/login.jsp"><%=LanguageParsing.getValue("login") %></a></li>
+					<li><a href="portfolio.jsp"><%=LanguageParsing.getValue("statistics") %></a></li>
+					<li><a href="about.jsp"><%=LanguageParsing.getValue("about") %></a></li>
+					<li><a href="contact.jsp"><%=LanguageParsing.getValue("contact") %></a></li>
+					<li><a href="login.jsp"><%=LanguageParsing.getValue("login") %></a></li>
 				</ul>
 			</div>
 			<!-- /menu -->
