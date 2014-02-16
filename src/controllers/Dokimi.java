@@ -38,10 +38,9 @@ public class Dokimi extends HttpServlet{
 		 Boolean b = true;
 		 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	     session.beginTransaction();
-	     //Νegotiation o = new Νegotiation( l, l, d, d, date);
-	     //session.save(o);
-	     PanelExchanges o = new PanelExchanges(l, l);
+	     Hit o = new Hit( l, l, d, d, date);
 	     session.save(o);
+	     
 	     session.getTransaction().commit();
 		 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 		   // view.forward(request, response);
