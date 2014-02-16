@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="PanelSellers" table="panel_sellers">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="sellerId" type="java.lang.Long" column="userId"/>
+       <property name="panelId" type="java.lang.Long" column="panelId"></property>
+      
+    </class>
+
+    
+
+
+</hibernate-mapping>
+
+
+

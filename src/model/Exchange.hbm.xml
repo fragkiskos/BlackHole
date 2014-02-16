@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="Exchange" table="exchange">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="exchangeTimestamp" type="java.util.Date" column="date"/>
+       <property name="shareId" type="java.lang.Long" column="shareId"/>
+       <property name="sellerId" type="java.lang.Long" column="sellerId"/>
+       <property name="buyerId" type="java.lang.Long" column="buyerId"/>
+       <property name="price" type="java.lang.Double" column="price"/>
+       <property name="quantity" type="java.lang.Long" column="selled_shares_Number"/>
+    </class>
+    
+
+
+</hibernate-mapping>
+
+

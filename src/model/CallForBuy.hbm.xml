@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="CallForBuy" table="call_for_buy">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="callerId" type="java.lang.Long" column="callerId"/>
+       <property name="shareId" type="java.lang.Long" column="shareId"/>
+       <property name="panelId" type="java.lang.Long" column="panelId"/>
+       <property name="date" type="java.util.Date" column="date"/>
+       
+    </class>
+    
+
+
+</hibernate-mapping>

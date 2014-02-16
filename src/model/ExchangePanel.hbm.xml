@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="ExchangePanel" table="exchangePanel">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       <property name="isclosed" type="java.lang.Boolean" column="isclosed"/>
+       <property name="shareId" type="java.lang.Long" column="shareId"></property>
+       <property name="createdDate" type="java.util.Date" column="createdDate"></property>
+       <property name="closedDate" type="java.util.Date" column="closedDate"></property>
+    </class>
+    
+
+
+</hibernate-mapping>
+
+
+

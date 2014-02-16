@@ -7,6 +7,6 @@ public class TableExchange {
 	long id;
 	List<User> sellers;
 	List<User> buyers;
-	List<Νegotiation> Negotiations;
+	List<Hit> Negotiations;
 
 }

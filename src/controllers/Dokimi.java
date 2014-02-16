@@ -21,7 +21,7 @@ import model.PanelExchanges;
 import model.PanelSellers;
 import model.PanelShareNegotiations;
 import model.Share;
-import model.Νegotiation;
+import model.Hit;
 import model.User;
 import utils.HibernateUtil;
 import utils.LanguageParsing;

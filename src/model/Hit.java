@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class Νegotiation {
+public class Hit {
 
 	long id;
 	long userId;
@@ -11,11 +11,11 @@ public class Νegotiation {
 	double oldPrice;
 	Date date;
 	
-	public Νegotiation() {
+	public Hit() {
 		super();
 	}
 
-	public Νegotiation( long userId, long shareId,
+	public Hit( long userId, long shareId,
 			double newPrice, double oldPrice, Date date) {
 		super();
 		
