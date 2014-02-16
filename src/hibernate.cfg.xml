@@ -35,6 +35,16 @@
 		<mapping resource="model/Share.hbm.xml"/>
 		<mapping resource="model/Company.hbm.xml"/>
 		<mapping resource="model/UsersShares.hbm.xml"/>
+		<mapping resource="model/CallForBuy.hbm.xml"/>
+		<mapping resource="model/CallForSell.hbm.xml"/>
+		<mapping resource="model/Exchange.hbm.xml"/>
+		<mapping resource="model/ExchangePanel.hbm.xml"/>
+		<mapping resource="model/PanelBuyers.hbm.xml"/>
+		<mapping resource="model/PanelSellers.hbm.xml"/>
+		<mapping resource="model/PanelExchanges.hbm.xml"/>
+		<mapping resource="model/PanelShareNegotiations.hbm.xml"/>
+		<mapping resource="model/Hit.hbm.xml"/> 
+		
     </session-factory>
 
 </hibernate-configuration>
