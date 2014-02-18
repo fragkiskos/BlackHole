@@ -1,6 +1,13 @@
 package controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +32,7 @@ import model.Hit;
 import model.User;
 import utils.HibernateUtil;
 import utils.LanguageParsing;
+import utils.dbUtils.DbTransactions;
 @WebServlet(  urlPatterns = {"/dokimi"})
 public class Dokimi extends HttpServlet{
 
@@ -33,17 +41,27 @@ public class Dokimi extends HttpServlet{
 		 System.out.println("ok");
 		 System.out.print(LanguageParsing.getValue("latestNews"));
 		 java.util.Date date= new java.util.Date();
-		 long l = 0;
-		 double d = 0.0;
+		 long l = 2;
+		 double d =3.0;
 		 Boolean b = true;
-		 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	     session.beginTransaction();
-	     Hit o = new Hit( l, l, d, d, date);
-	     session.save(o);
+		 Map properties = new HashMap<String,String>();
+		 properties.put("old_price", "0");
+		 String dateString = "2014-01-18 17:58:29";
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		 try {
+			Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateString);
+			List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperty(Hit.class.getCanonicalName(), "date", date2);
+		     System.out.println(o.size());
+		     
+		     
+			 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+			   // view.forward(request, response);
+			    response.getWriter().print("all right "+o.size());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	     
-	     session.getTransaction().commit();
-		 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-		   // view.forward(request, response);
-		    response.getWriter().print("all right");
 	 }
 }

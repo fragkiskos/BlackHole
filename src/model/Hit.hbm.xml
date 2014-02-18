@@ -6,7 +6,7 @@
 <hibernate-mapping package="model">
 
 
-    <class name="Hit" table="Negotiation">
+    <class name="Hit" table="Hit">
 
     
         <id name="id" column="id">

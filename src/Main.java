@@ -11,8 +11,13 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//System.out.print(LanguageParsing.getValue("latestNews"));
-		NewsParser.getBreakingNews();
+		long l = 1;
+		double d;
+		boolean b;
+		String s;
+		int i;
+		
+		
 	}
 
 }
