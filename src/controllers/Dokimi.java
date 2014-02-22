@@ -41,22 +41,25 @@ public class Dokimi extends HttpServlet{
 		 System.out.println("ok");
 		 System.out.print(LanguageParsing.getValue("latestNews"));
 		 java.util.Date date= new java.util.Date();
-		 long l = 2;
+		 long l =0;
 		 double d =3.0;
 		 Boolean b = true;
 		 Map properties = new HashMap<String,String>();
-		 properties.put("old_price", "0");
-		 String dateString = "2014-01-18 17:58:29";
+		
+		 String dateString = "2014-02-18 17:58:29";
 		 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		 try {
 			Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateString);
-			List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperty(Hit.class.getCanonicalName(), "date", date2);
-		     System.out.println(o.size());
-		     
+			 properties.put("old_price",l);
+			 properties.put("date", date2);
+			//List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperties(Hit.class.getCanonicalName(), properties);
+			//List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperty(Hit.class.getCanonicalName(), "date",date2);
+			//System.out.println(o.size());
+			 DbTransactions.deleteObjectById(Hit.class.getCanonicalName(), 4);
 		     
 			 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			   // view.forward(request, response);
-			    response.getWriter().print("all right "+o.size());
+			    response.getWriter().print("all right ");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

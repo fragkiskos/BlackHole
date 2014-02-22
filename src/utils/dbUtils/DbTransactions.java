@@ -1,6 +1,7 @@
 package utils.dbUtils;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -108,11 +109,30 @@ public class DbTransactions {
 		
 	}
 	
+	public static List<Object> getObjectsByProperty(String className,String key,boolean value){
+		try{
+			
+			
+			String query = "from "+className+" where "+key+"=?";
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			Query sqlQuery = session.createQuery(query);
+			sqlQuery.setBoolean(0, value);
+			System.out.println(sqlQuery);
+			List<Object> results = sqlQuery.list();
+			return results;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
 	public static List<Object> getObjectsByProperty(String className,String key,Date value){
 		try{
 			
 			
-			String query = " from "+className+" where "+key+">?";
+			String query = " from "+className+" where "+key+"=?";
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			Query sqlQuery = session.createQuery(query);
@@ -161,18 +181,182 @@ public class DbTransactions {
 		}
 		
 	}
-	public static List<Object> getObjectsByProperties(Map<Object,Object> properties){
-		return null;
+	public static List<Object> getObjectsByProperties(String className,Map<Object,Object> properties){
+		try{
+			String query = " from "+className+" where ";
+			Iterator iterator = properties.entrySet().iterator();
+			int i=1;
+			while (iterator.hasNext()) {
+				if(i<properties.size()){
+					Map.Entry mapEntry = (Map.Entry) iterator.next();
+					query = query + mapEntry.getKey()+"=? AND ";
+				}else{
+					Map.Entry mapEntry = (Map.Entry) iterator.next();
+					query = query + mapEntry.getKey()+"=?";
+				}
+				
+				i++;
+			}
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			
+			Query sqlQuery = session.createQuery(query);
+			System.out.println(sqlQuery);
+			Iterator iterator2 = properties.entrySet().iterator();
+			i=0;
+			while (iterator2.hasNext()) {
+				Map.Entry mapEntry = (Map.Entry) iterator2.next();
+				if(mapEntry.getValue().getClass().getName().equals("java.lang.Long") ){
+					sqlQuery.setLong(i,(Long) mapEntry.getValue());
+				}
+				if(mapEntry.getValue().getClass().getName().equals("java.lang.String") ){
+					sqlQuery.setString(i,(String) mapEntry.getValue());
+				}
+				if(mapEntry.getValue().getClass().getName().equals("java.lang.Double") ){
+					sqlQuery.setDouble(i,(Double) mapEntry.getValue());
+				}
+				if(mapEntry.getValue().getClass().getName().equals("java.lang.Boolean") ){
+					sqlQuery.setBoolean(i,(Boolean) mapEntry.getValue());
+				}
+				if(mapEntry.getValue().getClass().getName().equals("java.lang.Integer") ){
+					sqlQuery.setInteger(i,(Integer) mapEntry.getValue());
+				}
+				if(mapEntry.getValue().getClass().getName().equals("java.util.Date") ){
+					sqlQuery.setTimestamp(i,(Date) mapEntry.getValue());
+				}
+				
+				i++;
+			}
+			
+			List<Object> results = sqlQuery.list();
+			return results;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 	}
-	public static boolean deleteObjectById(long id){
-		return false;
+	}
+	public static boolean deleteObjectById(String className, long id){
+		try{
+			Object o = getObjectById(className, id);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			session.delete(o);
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
 	}
 	
-	public static boolean deleteObjectsByProperty(Object key,Object value){
-		return false;
+	public static boolean deleteObjectsByProperty(String className, String key,long value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
 	}
 	
-	public static List<Object> deleteObjectsByProperties(Map<Object,Object> properties){
-		return null;
+	public static boolean deleteObjectsByProperty(String className, String key,Date value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
+	
+	public static boolean deleteObjectsByProperty(String className, String key,String value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
+	
+	public static boolean deleteObjectsByProperty(String className, String key,int value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
+	
+	public static boolean deleteObjectsByProperty(String className, String key,double value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
+	
+	public static boolean deleteObjectsByProperty(String className, String key,boolean value){
+		try{
+			List<Object> os = getObjectsByProperty(className, key, value);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
+	public static boolean deleteObjectsByProperties(String className,Map<Object,Object> properties){
+		try{
+			List<Object> os = getObjectsByProperties(className, properties);
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			for(int i=0;i<os.size();i++){
+				session.delete(os.get(i));
+			}
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
 	}
 }
