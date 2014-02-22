@@ -23,6 +23,7 @@
 		});
 	</script>
 	<link rel="stylesheet" href="../css/main.css" type="text/css" />
+	<link rel="stylesheet" href="../css/style.css" type="text/css" />
 </head>
 <body>
 	<div id="bg">

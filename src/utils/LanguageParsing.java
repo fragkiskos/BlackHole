@@ -20,7 +20,7 @@ public class LanguageParsing {
 			br = new BufferedReader(new FileReader(propertiesFilePath));
  
 			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
+				//System.out.println(sCurrentLine);
 				String curKey = sCurrentLine.split("=")[0];
 				String value = sCurrentLine.split("=")[1];
 				if(curKey.equals(key)){
