@@ -4,7 +4,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
+import utils.LanguageParsing;
+import utils.Mailer;
 import utils.RandomString;
+import utils.dbUtils.DbTransactions;
 import model.User;
 
 public class UserUtil {
@@ -14,6 +17,11 @@ public class UserUtil {
 			Date now = new Date();
 			RandomString rs = new RandomString(8);
 			String password =rs.nextString();
+			try{
+				Mailer.sendMail(email, LanguageParsing.getValue("login.mail.subject"), LanguageParsing.getValue("login.mail.text")+" "+password);
+			}catch(Exception ex){
+				return false;
+			}
 			String passwordMd5="";
 			try {
 				 passwordMd5 = makeSHA1Hash(password);
@@ -22,6 +30,7 @@ public class UserUtil {
 				e.printStackTrace();
 			}
 			User user = new User(username, email, name, sirname, phone, loginService, false, passwordMd5, "", "", 1000.0, true, now, null);
+			DbTransactions.storeObject(user);
 			return true;
 		}catch(Exception ex){
 			return false;
