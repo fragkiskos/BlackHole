@@ -24,13 +24,54 @@
 	</script>
 	<link rel="stylesheet" href="../css/main.css" type="text/css" />
 	<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<link rel="stylesheet" href="../css/menu.css" type="text/css" />
 </head>
 <body>
+<h1>ItStock</h1>
 	<div id="bg">
-	<div style="background-color:gray;">menu</div>
+	
+	<div style="background-color:gray;">
+<div class="primary">
+        <p style="visibility:hidden">Primary Sidebar</p>
+    </div>
+    
+    <div class="content">
+        <form method="get" action="/search" id="search">
+  			<input name="q" type="text" size="40" placeholder="Search..." />
+		</form>
+    </div>
+    
+    <div class="secondary">
+    <%if(true){ %>
+    <span style="visibility:hidden">it stock &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span >
+        <img src="../images/menu/profile.png" class="menuIcon" title="profile" />
+        <img src="../images/menu/mail_now.png" class="menuIcon" title="messages"/>
+        <img src="../images/menu/notification_now.png" class="menuIcon" title="notifications"/>
+        <img src="../images/menu/exit.png" class="menuIcon" title="logout" />
+        <%}else{ %>
+        <div >
+        	<form method="post" action="/itstock/loginAction" id="signIn">
+        	<div class="primary">
+        	<input name="q" type="text" size="20" placeholder="username" />
+        	</div>
+        	<div class="content">
+  				<input name="q" type="text" size="20" placeholder="password" />
+  			</div>
+  			<div class="secondary">
+  				<input id="loginButton" type="submit" value="σύνδεση" />
+  				</div>
+	 		</form> 
+	 	</div> 
+        <%} %>
+      
+    </div>	
+
+
+	</div>
+	</div>
 		<div class="wrap">
 			
-			<!-- logo -->
+			<!-- logo 
 			<h1><a href="index.jsp">ItStock</a></h1>
 			<!-- /logo -->
 			

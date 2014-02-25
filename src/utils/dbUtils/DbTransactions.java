@@ -156,6 +156,7 @@ public class DbTransactions {
 			Query sqlQuery = session.createQuery(query);
 			sqlQuery.setString(0, value);
 			List<Object> results = sqlQuery.list();
+			session.getTransaction().commit();
 			return results;
 		}catch(Exception e){
 			e.printStackTrace();
