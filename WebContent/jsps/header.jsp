@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="utils.NewsParser" %>
 <%@ page import="utils.LanguageParsing" %>
+<%@ page import="model.User" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -40,22 +41,29 @@
   			<input name="q" type="text" size="40" placeholder="Search..." />
 		</form>
     </div>
-    
+    <% 
+    boolean logedIn = false;
+    if(request.getSession().getAttribute("logedIn")!=null){
+    	 logedIn =(Boolean) request.getSession().getAttribute("logedIn");
+    }
+    User user = (User)request.getSession().getAttribute("user");
+     %>
     <div class="secondary">
-    <%if(true){ %>
-    <span style="visibility:hidden">it stock &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span >
-        <img src="../images/menu/profile.png" class="menuIcon" title="profile" />
+    
+    <%if(logedIn){ %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="profile.html" class="username"> <%=user.getUsername() %>&nbsp;</a>
         <img src="../images/menu/mail_now.png" class="menuIcon" title="messages"/>
         <img src="../images/menu/notification_now.png" class="menuIcon" title="notifications"/>
-        <img src="../images/menu/exit.png" class="menuIcon" title="logout" />
+       <a href="/itstock/logout"> <img src="../images/menu/exit.png" class="menuIcon" title="logout" /></a>
         <%}else{ %>
         <div >
         	<form method="post" action="/itstock/loginAction" id="signIn">
         	<div class="primary">
-        	<input name="q" type="text" size="20" placeholder="username" />
+        		<input name="username" type="text" size="20" placeholder="username" />
         	</div>
         	<div class="content">
-  				<input name="q" type="text" size="20" placeholder="password" />
+  				<input name="password" type="password" size="20"  placeholder="password" />
   			</div>
   			<div class="secondary">
   				<input id="loginButton" type="submit" value="σύνδεση" />
@@ -96,7 +104,7 @@
 					
 					<!-- 1st frame -->
 					<div class="active">
-						<img src="../images/pitch/pitch1.jpg" alt="" />
+						<img src="../images/pitch/pitch1.jpg"   alt="" />
 						<div class="overlay transparent">
 							<h2><%=LanguageParsing.getValue("bannerTitle.DigitalStockExchange") %></h2>
 							<p><%=LanguageParsing.getValue("bannerSubTitle.DigitalStockExchange") %></p>

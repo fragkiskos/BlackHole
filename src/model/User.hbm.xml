@@ -17,6 +17,7 @@
        <property name="phone" type="java.lang.String" column="phone"/>
        <property name="loginService" type="java.lang.String" column="loginService"/>
        <property name="locked" type="java.lang.Boolean" column="locked"/>
+       <property name="firstLogin" type="java.lang.Boolean" column="firstLogin"/>
        <property name="password" type="java.lang.String" column="password"/>
        <property name="passQuestion" type="java.lang.String" column="passQuestion"/>
        <property name="passAnswer" type="java.lang.String" column="passAnswer"/>

@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,11 +10,17 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import utils.Mailer;
+import utils.modelUtils.UserUtil;
  
 public class Main {
  
 	public static void main(String[] args) {
  
-		Mailer.sendMail("alefas88@gmail.com", "sadas", "sdfsa");
+		try {
+			System.out.println(UserUtil.makeSHA1Hash("@lefas88"));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

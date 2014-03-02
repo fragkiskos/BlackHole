@@ -3,6 +3,7 @@ package utils.modelUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.List;
 
 import utils.LanguageParsing;
 import utils.Mailer;
@@ -29,13 +30,22 @@ public class UserUtil {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			User user = new User(username, email, name, sirname, phone, loginService, false, passwordMd5, "", "", 1000.0, true, now, null);
+			User user = new User(username, email, name, sirname, phone, loginService, false, passwordMd5, "", "", 1000.0, true, now, null,true);
 			DbTransactions.storeObject(user);
 			return true;
 		}catch(Exception ex){
 			return false;
 		}
 		
+	}
+	
+	public static  User getUserByUsername(String username){
+		List<User> users = (List<User>)(List<?>) DbTransactions.getObjectsByProperty(User.class.getCanonicalName(), "userName", username);
+		if(users.size() == 1){
+			return users.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 	public static String makeSHA1Hash(String input)
@@ -53,5 +63,15 @@ public class UserUtil {
             }
             return hexStr;
         }
+	
+	public static boolean Save(User user){
+		try{
+			DbTransactions.updateObject(user);
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+		
+	}
 
 }

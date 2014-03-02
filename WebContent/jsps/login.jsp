@@ -78,7 +78,7 @@ $( document ).ready(function() {
 <a href="#"><img src="../images/gmail.jpg" alt="gmail" width="60px" height="20px"/> </a></div>
 <br></br>
 
-<form action="/itstock/loginAction" method="post" class="basic-grey" onsubmit="return validateForm();">
+<form action="/itstock/createAccount" method="post" class="basic-grey" onsubmit="return validateForm();">
      <div id="error"  class="error" style="display:none">
      <p id="emailMissing" style="display:none"><%=LanguageParsing.getValue("login.message.validate.email") %></p>
      <p id="usernameMissing" style="display:none"><%=LanguageParsing.getValue("login.message.validate.username") %></p>

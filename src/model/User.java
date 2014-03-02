@@ -20,6 +20,7 @@ public class User {
 	private Boolean active=true; 
 	private Date InsertedDate; 
 	private Date deactivateDate;
+	private Boolean firstLogin=true; 
 	
 	
 	
@@ -31,7 +32,7 @@ public class User {
 			String sirname, String phone, String loginService, boolean locked,
 			String password, String passQuestion, String passAnswer,
 			Double frankos, boolean active, Date insertedDate,
-			Date deactivateDate) {
+			Date deactivateDate,boolean firstLogin) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -48,6 +49,7 @@ public class User {
 		this.active = active;
 		InsertedDate = insertedDate;
 		this.deactivateDate = deactivateDate;
+		this.firstLogin = firstLogin;
 	}
 	public long getId() {
 		return id;
@@ -138,8 +140,27 @@ public class User {
 	}
 	public void setDeactivateDate(Date deactivateDate) {
 		this.deactivateDate = deactivateDate;
+	}
+	public Boolean getLocked() {
+		return locked;
+	}
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public Boolean getFirstLogin() {
+		return firstLogin;
+	}
+	public void setFirstLogin(Boolean firstLogin) {
+		this.firstLogin = firstLogin;
 	} 
 
+	
 	
 	
 }
