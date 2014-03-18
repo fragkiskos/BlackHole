@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+
+    <class name="Message" table="message">
+
+    
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+       
+       <property name="senderId" type="java.lang.Long" column="senderId"/>
+       <property name="receiverId" type="java.lang.Long" column="recieverId"/>
+       <property name="text" type="java.lang.String" column="text"/>
+       <property name="theme" type="java.lang.String" column="theme"/>
+       <property name="date" type="java.util.Date" column="date"/>
+       <property name="readed" type="java.lang.Boolean" column="readed"></property>
+    </class>
+    
+
+
+</hibernate-mapping>
+
+
