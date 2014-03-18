@@ -48,6 +48,11 @@ public class UserUtil {
 		}
 	}
 	
+	public static  User getUserById(Long id){
+		User user = (User) DbTransactions.getObjectById(User.class.getCanonicalName(), id);
+		return user;
+	}
+	
 	public static String makeSHA1Hash(String input)
             throws NoSuchAlgorithmException
         {

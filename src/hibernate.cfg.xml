@@ -44,6 +44,7 @@
 		<mapping resource="model/PanelExchanges.hbm.xml"/>
 		<mapping resource="model/PanelShareNegotiations.hbm.xml"/>
 		<mapping resource="model/Hit.hbm.xml"/> 
+		<mapping resource="model/Message.hbm.xml"/> 
 		
     </session-factory>
 

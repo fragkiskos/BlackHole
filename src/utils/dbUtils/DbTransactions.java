@@ -64,6 +64,7 @@ public class DbTransactions {
 			session.beginTransaction();
 			Query sqlQuery = session.createSQLQuery(query);
 			List<Object> results = sqlQuery.list();
+			session.getTransaction().commit();
 			return results;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -72,89 +73,41 @@ public class DbTransactions {
 		
 	}
 	
-	public static List<Object> getObjectsByProperty(String className,String key,long value){
+	
+
+	
+	public static List<Object> getObjectsByProperty(String className,String key,Object value){
 		try{
 			
-			
+			String propertyClassName = value.getClass().getCanonicalName();
 			String query = " from "+className+" where "+key+"=?";
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setLong(0, value);
-			List<Object> results = sqlQuery.list();
-			return results;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	public static List<Object> getObjectsByProperty(String className,String key,double value){
-		try{
-			
-			
-			String query = "from "+className+" where "+key+"=?";
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setDouble(0, value);
-			System.out.println(sqlQuery);
-			List<Object> results = sqlQuery.list();
-			return results;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	public static List<Object> getObjectsByProperty(String className,String key,boolean value){
-		try{
-			
-			
-			String query = "from "+className+" where "+key+"=?";
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setBoolean(0, value);
-			System.out.println(sqlQuery);
-			List<Object> results = sqlQuery.list();
-			return results;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	public static List<Object> getObjectsByProperty(String className,String key,Date value){
-		try{
-			
-			
-			String query = " from "+className+" where "+key+"=?";
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setTimestamp(0, value);
-			List<Object> results = sqlQuery.list();
-			return results;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	public static List<Object> getObjectsByProperty(String className,String key,String value){
-		try{
-			
-			
-			String query = " from "+className+" where "+key+"=?";
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setString(0, value);
+			if(propertyClassName.equals("java.lang.Long")){
+				Long castedValue = (Long)value;
+				sqlQuery.setLong(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Double")){
+				Double castedValue = (Double)value;
+				sqlQuery.setDouble(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Boolean")){
+				Boolean castedValue = (Boolean)value;
+				sqlQuery.setBoolean(0, castedValue);
+			}
+			if(propertyClassName.equals("java.util.Date")){
+				Date castedValue = (Date)value;
+				sqlQuery.setTimestamp(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Integer")){
+				Integer castedValue = (Integer)value;
+				sqlQuery.setInteger(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.String")){
+				String castedValue = (String)value;
+				sqlQuery.setString(0, castedValue);
+			}
 			List<Object> results = sqlQuery.list();
 			session.getTransaction().commit();
 			return results;
@@ -165,16 +118,40 @@ public class DbTransactions {
 		
 	}
 	
-	public static List<Object> getObjectsByProperty(String className,String key,int value){
+	public static List<Object> getObjectsByPropertyOrderBy(String className,String key,Object value,String orderColumn){
 		try{
 			
-			
-			String query = " from "+className+" where "+key+"=?";
+			String propertyClassName = value.getClass().getCanonicalName();
+			String query = " from "+className+" where "+key+"=? order by "+orderColumn ;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			Query sqlQuery = session.createQuery(query);
-			sqlQuery.setInteger(0, value);
+			if(propertyClassName.equals("java.lang.Long")){
+				Long castedValue = (Long)value;
+				sqlQuery.setLong(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Double")){
+				Double castedValue = (Double)value;
+				sqlQuery.setDouble(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Boolean")){
+				Boolean castedValue = (Boolean)value;
+				sqlQuery.setBoolean(0, castedValue);
+			}
+			if(propertyClassName.equals("java.util.Date")){
+				Date castedValue = (Date)value;
+				sqlQuery.setTimestamp(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.Integer")){
+				Integer castedValue = (Integer)value;
+				sqlQuery.setInteger(0, castedValue);
+			}
+			if(propertyClassName.equals("java.lang.String")){
+				String castedValue = (String)value;
+				sqlQuery.setString(0, castedValue);
+			}
 			List<Object> results = sqlQuery.list();
+			session.getTransaction().commit();
 			return results;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -230,6 +207,7 @@ public class DbTransactions {
 			}
 			
 			List<Object> results = sqlQuery.list();
+			session.getTransaction().commit();
 			return results;
 		}catch(Exception e){
 			e.printStackTrace();

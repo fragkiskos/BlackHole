@@ -37,9 +37,10 @@ img {
 
 body { 
 	font: .8em Arial, Verdana, Tahoma, Sans-Serif; 
-	background: #f4f4f4 url(../images/bgtile.jpg) repeat-x; 
+	background: #f4f4f4 url(../images/bgtileSmall.jpg) repeat-x; 
 	color: #555; 
 }
+
 
 /* typography and links */
 a { 
@@ -501,5 +502,36 @@ background-image: url('warning.png');
 color: #D8000C;
 background-color: #FFBABA;
 background-image: url('error.png');
+}
+
+#mailSide{
+	background-color:white;
+	clear: left; 
+	float: left; 
+	width: 220px;
+	border-right: 1px dotted #ddd;
+	padding: 0 30px 0 0;
+	margin: 0 0 30px;
+}
+
+#mailMain{
+	float: right; 
+	width: 680px; 
+	font-size: .9em;
+}
+
+#mailPitch { 
+	clear: both; 
+	height: 96px; 
+	background: url(../images/shadow.png) no-repeat left bottom;
+	margin: 0 0 25px;
+}
+
+.mailMessages{
+	font-weight:bold;
+	
+}
+.mailMessages:hover{
+	color:red;
 }
 

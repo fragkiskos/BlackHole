@@ -56,6 +56,6 @@
 			
 			<!-- side -->
 			<jsp:include page="news.jsp"/>
-		</div>
+		
 			
 <jsp:include page="footer.jsp"/>	

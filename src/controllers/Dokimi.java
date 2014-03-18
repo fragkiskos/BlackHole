@@ -33,6 +33,7 @@ import model.User;
 import utils.HibernateUtil;
 import utils.LanguageParsing;
 import utils.dbUtils.DbTransactions;
+import utils.messageUtil.Messager;
 @WebServlet(  urlPatterns = {"/dokimi"})
 public class Dokimi extends HttpServlet{
 
@@ -41,7 +42,7 @@ public class Dokimi extends HttpServlet{
 		 System.out.println("ok");
 		 System.out.print(LanguageParsing.getValue("latestNews"));
 		 java.util.Date date= new java.util.Date();
-		 long l =0;
+		 long l =2;
 		 double d =3.0;
 		 Boolean b = true;
 		 Map properties = new HashMap<String,String>();
@@ -55,9 +56,12 @@ public class Dokimi extends HttpServlet{
 			//List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperties(Hit.class.getCanonicalName(), properties);
 			//List<Hit> o = (List<Hit>)(List<?>) DbTransactions.getObjectsByProperty(Hit.class.getCanonicalName(), "date",date2);
 			//System.out.println(o.size());
-			 DbTransactions.deleteObjectById(Hit.class.getCanonicalName(), 4);
-		     
-			 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+			// DbTransactions.deleteObjectById(Hit.class.getCanonicalName(), 4);
+			 
+				model.Message message = Messager.getMessage(l);
+				Messager.replyMessage(message, "sdfsfsfds");
+				
+			 //RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			   // view.forward(request, response);
 			    response.getWriter().print("all right ");
 		} catch (ParseException e) {

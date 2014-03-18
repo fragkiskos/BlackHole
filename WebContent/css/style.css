@@ -38,7 +38,7 @@
 }
 .basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea,.basic-grey select{
     border: 1px solid #DADADA;
-    color: #888;
+    color: black;
     height: 24px;
     margin-bottom: 16px;
     margin-right: 6px;
@@ -60,7 +60,9 @@
     height: 30px;
 }
 .basic-grey textarea{
-    height:100px;
+    height:400px;
+    width:400px;
+    color:black;
 }
 .basic-grey .button {
     background: #E48F8F;

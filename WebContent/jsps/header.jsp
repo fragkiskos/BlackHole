@@ -43,18 +43,27 @@
     </div>
     <% 
     boolean logedIn = false;
-    if(request.getSession().getAttribute("logedIn")!=null){
+    if(request.getSession().getAttribute("user")!=null){
     	 logedIn =(Boolean) request.getSession().getAttribute("logedIn");
+    	 
     }
     User user = (User)request.getSession().getAttribute("user");
-     %>
+         %>
     <div class="secondary">
     
     <%if(logedIn){ %>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="profile.html" class="username"> <%=user.getUsername() %>&nbsp;</a>
-        <img src="../images/menu/mail_now.png" class="menuIcon" title="messages"/>
-        <img src="../images/menu/notification_now.png" class="menuIcon" title="notifications"/>
+        <a href="profile.jsp" class="username"> <%=user.getUsername() %>&nbsp;</a>
+        <span class="noti_Container">
+        <a href="../getIncoming?userId=<%=user.getId()%>">
+        <img src="../images/menu/mail.png" class="menuIcon" title="messages"/>
+        <span class="noti_bubble">2</span>
+        </a>
+        </span>
+        <span class="noti_Container">
+        <img src="../images/menu/notifications.png" class="menuIcon" title="notifications"/>
+        <span class="noti_bubble">2</span>
+        </span>
        <a href="/itstock/logout"> <img src="../images/menu/exit.png" class="menuIcon" title="logout" /></a>
         <%}else{ %>
         <div >
