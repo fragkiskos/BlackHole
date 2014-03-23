@@ -12,6 +12,52 @@ User user = (User)request.getSession().getAttribute("user");
 if(user!=null){
 	
 %>
+<script type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+	
+	$("input#all").change(function() {
+		 if(this.checked) {
+		    	$('input:checkbox').attr('checked','checked');
+		    }else{
+		    	$('input:checkbox').removeAttr('checked');
+		    }
+	});
+	$('input:checkbox').change(function() {
+		if(this.checked) {
+	    	
+	    }else{
+	    	$("input#all").removeAttr('checked');
+	    }
+	});
+	
+	$("a#delete").click(function(){
+		document.getElementById("action").setAttribute("value", "delete");
+		var counter = isOneCheckBoxChecked();
+		if(counter==0){
+			popup('<%=LanguageParsing.getValue("popup.chooseOne")%>');
+		}else{
+			$("form#messageAction").submit();
+		}
+	});
+	$("a#signedAsRead").click(function(){
+		document.getElementById("action").setAttribute("value", "signedAsRead");
+		var counter = isOneCheckBoxChecked();
+		if(counter==0){
+			popup('<%=LanguageParsing.getValue("popup.chooseOne")%>');
+		}else{
+			$("form#messageAction").submit();
+		}
+	});
+	
+	function isOneCheckBoxChecked(){
+		
+		return  $( "input:checked" ).length;
+	}
+	
+});
+</script>
+<jsp:include page="../popUps/popup.jsp" />
 			<!-- side -->
 			<div id=mailSide>
 			<ul class="side-menu">
@@ -21,13 +67,13 @@ if(user!=null){
 				</ul>
 			</div>
 			<!-- /side -->
-			
-			
+			<form id="messageAction" method="post" action="/itstock/messageHandler">
+			<input id="action" name="action" style="display:none;" type="text" value="signedAsRead"/>
 			<!-- main -->
 			<div id=mailMain>
-			<span><a class="mailMessages" href="#"><%=LanguageParsing.getValue("messaging.create") %></a></span>&nbsp;
-			<span><a class="mailMessages" href="#"><%=LanguageParsing.getValue("messaging.delete") %></a></span>&nbsp;
-			<span><a class="mailMessages" href="#"><%=LanguageParsing.getValue("messaging.signedAsRead") %></a></span>
+			<span><a class="mailMessages" href="../messaging/sendMessage.jsp"><%=LanguageParsing.getValue("messaging.create") %></a></span>&nbsp;
+			<span><a id="delete" class="mailMessages" href="#"><%=LanguageParsing.getValue("messaging.delete") %></a></span>&nbsp;
+			<span><a id="signedAsRead" class="mailMessages" href="#"><%=LanguageParsing.getValue("messaging.signedAsRead") %></a></span>
 			
 			<table class="table">
 						<thead>
@@ -44,8 +90,10 @@ if(user!=null){
 						<%List<model.Message> messages =(List<model.Message>) session.getAttribute("messages");
 							
 							
-							if(messages!=null){
-								for(int i=0;i<messages.size();i++){
+							if(messages!=null && messages.size()>0 ){%>
+							
+								<tr ><td style="width:100px"><input type="checkbox" id="all" name="all" value="all" style="position:relative;top: 3px;left:95px" /><%=LanguageParsing.getValue("selectAll") %></td><tr>
+								<% for(int i=0;i<messages.size();i++){
 									model.Message message = messages.get(i);
 									boolean isreaded = message.getReaded();
 									if(isreaded){
@@ -53,7 +101,7 @@ if(user!=null){
 								
 									<tr style="background: silver;">
 									
-										<td><input type="checkbox" />&nbsp;<a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getSenderId()).getUsername()%></a></td>
+										<td><input type="checkbox" name=<%=i %>   value="<%=message.getId() %>" style="position:relative;top: 3px;left:1px" />&nbsp;<a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getSenderId()).getUsername()%></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getReceiverId()).getUsername()%></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=message.getTheme() %></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=message.getDate() %></a></td>
@@ -63,7 +111,7 @@ if(user!=null){
 									
 										<tr>
 										
-										<td><input type="checkbox"  />&nbsp;<a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getSenderId()).getUsername()%></a></td>
+										<td><input type="checkbox" name=<%=i %>   value="<%=message.getId() %>"  name="<%=message.getId() %>" value="true" style="position:relative;top: 3px;left:1px"/>&nbsp;<a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getSenderId()).getUsername()%></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=UserUtil.getUserById(message.getReceiverId()).getUsername()%></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=message.getTheme() %></a></td>
 										<td><a href="../../readMessage?messageId=<%=message.getId() %>"><%=message.getDate() %></a></td>
@@ -78,7 +126,7 @@ if(user!=null){
 					</table>
 			</div>
 			<!-- /main -->
-			
+			</form>
 			
 <%} %>		
 			
