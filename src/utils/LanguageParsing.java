@@ -13,7 +13,7 @@ public class LanguageParsing {
 		BufferedReader br = null;
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	    String propertiesFilePath=classLoader.getResource("languages/greek.properties").getPath();
-		System.out.println(propertiesFilePath);
+		//System.out.println(propertiesFilePath);
 	    try {
  
 			String sCurrentLine;

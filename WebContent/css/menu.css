@@ -154,6 +154,7 @@
     height:16px;
 }
 .noti_bubble {
+	
     position:absolute;    /* This breaks the div from the normal HTML document. */
     top: -6px;
     right:10px;

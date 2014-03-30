@@ -118,11 +118,13 @@ public class DbTransactions {
 		
 	}
 	
+	
+	
 	public static List<Object> getObjectsByPropertyOrderBy(String className,String key,Object value,String orderColumn){
 		try{
 			
 			String propertyClassName = value.getClass().getCanonicalName();
-			String query = " from "+className+" where "+key+"=? order by "+orderColumn ;
+			String query = " from "+className+" where "+key+"=? order by "+orderColumn +" desc" ;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			Query sqlQuery = session.createQuery(query);

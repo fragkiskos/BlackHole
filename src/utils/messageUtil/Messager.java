@@ -19,12 +19,12 @@ public class Messager {
 	}
 	
 	public static List<Message> getIncoming(long userId){
-		List<Message> incomingMessages = (List<Message>)(List<?>)DbTransactions.getObjectsByPropertyOrderBy(Message.class.getCanonicalName(), "recieverId", userId,"readed");
+		List<Message> incomingMessages = (List<Message>)(List<?>)DbTransactions.getObjectsByPropertyOrderBy(Message.class.getCanonicalName(), "recieverId", userId,"date");
 		return incomingMessages;
 	}
 	
 	public static List<Message> getOutGoing(long userId){
-		List<Message> outgoingMessages = (List<Message>)(List<?>)DbTransactions.getObjectsByPropertyOrderBy(Message.class.getCanonicalName(), "senderId", userId,"readed");
+		List<Message> outgoingMessages = (List<Message>)(List<?>)DbTransactions.getObjectsByPropertyOrderBy(Message.class.getCanonicalName(), "senderId", userId,"date");
 		return outgoingMessages;
 	}
 	
@@ -44,6 +44,11 @@ public class Messager {
 			ok = deleteMessage(messages.get(i));
 		}
 		return ok;
+	}
+	
+	public static int getIncomingUnReadedCount(){
+		List<Message> incomingMessages = (List<Message>)(List<?>)DbTransactions.getObjectsByProperty(Message.class.getCanonicalName(), "readed", 0);
+		return incomingMessages.size();
 	}
 	
 	

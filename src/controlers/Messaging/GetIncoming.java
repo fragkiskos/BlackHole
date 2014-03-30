@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utils.dbUtils.Pagination;
 import utils.messageUtil.Messager;
 
 /**
@@ -33,13 +34,59 @@ public class GetIncoming extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int start = 0;
+		int end = 10;
 		String param =  request.getParameter("userId");
-		Long userId = Long.parseLong(param);
-		List<model.Message> messages =  Messager.getIncoming(userId);
-		HttpSession session = request.getSession(false);
-		session.setAttribute("messages", messages);
+		String param1 = request.getParameter("start");
+		String param2 = request.getParameter("end");
+		if(param1!=null){
+			try{
+				start = Integer.parseInt(param1);
+			}catch(Exception ex){
+				start = 0;
+			}
+			
+		}
+		if(param2!=null){
+			try{
+				end = Integer.parseInt(param2);
+			}catch(Exception ex){
+				end = 10;
+			}
+			
+		}
+		try{
+			Long userId = Long.parseLong(param);
+			List<model.Message> allMessages = Messager.getIncoming(userId);
+			List<model.Message> messages;
+			if(allMessages.size()>10){
+				 messages =  Messager.getIncoming(userId).subList(start, end);
+			}else{
+				 messages = allMessages;
+			}
+			
+			HttpSession session = request.getSession(false);
+			session.setAttribute("messages", messages);
+			session.setAttribute("kind", "Incoming");
+			session.setAttribute("messagesCount", allMessages.size());
+			session.setAttribute("start", start);
+			session.setAttribute("end", end);
+			session.setAttribute("hasPrevious", Pagination.hasPrevious(start));
+			session.setAttribute("hasNext", Pagination.hasNext(end, allMessages.size()));
+			if(Pagination.hasNext(end, allMessages.size())){
+				session.setAttribute("next", Pagination.getPaginationNext(start, end, allMessages.size()));
+			}
+			if(Pagination.hasPrevious(start)){
+				session.setAttribute("previous", Pagination.getPaginationPrevious(start));
+			}
+			
+			response.sendRedirect("jsps/messaging/messages.jsp");
+		}catch(Exception ex){
+			response.sendRedirect("jsps/index.jsp");
+		}
 		
-	    response.sendRedirect("jsps/messaging/messages.jsp");
+		
+	    
 		
 	}
 

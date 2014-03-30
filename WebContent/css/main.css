@@ -535,3 +535,20 @@ background-image: url('error.png');
 	color:red;
 }
 
+span.next-previous{
+	border-style:solid;
+	border-width:0.1px;
+	padding:4px;
+	border-color: gray;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+	color: gray;
+	border-radius:10px;
+	
+}
+span.next-previous:HOVER {
+	color: black;
+	border-color: black;
+	box-shadow: 1px 1px 2px #888888;
+}

@@ -10,6 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import utils.DateUtils;
 import utils.Mailer;
 import utils.messageUtil.Messager;
 import utils.modelUtils.UserUtil;
@@ -17,8 +18,7 @@ import utils.modelUtils.UserUtil;
 public class Main {
  
 	public static void main(String[] args) {
-		long a = 3;
-		Object o = a;
-		System.out.println(o.getClass().getCanonicalName());
+		Date now = new Date();
+		System.out.print(DateUtils.getEuropeDate(now));
 	}
 }

@@ -37,3 +37,41 @@ function popup(message) {
 			
 }
 
+$(document).ready(function () {
+
+	// if user clicked on button, the overlay layer or the dialogbox, close the dialog	
+	$('a.btn-ok, #confirm-dialog-overlay, #confirm-dialog-box').click(function () {		
+		$('#confirm-dialog-overlay, #confirm-dialog-box').hide();		
+		return false;
+	});
+	
+	// if user resize the window, call the same function again
+	// to make sure the overlay fills the screen and dialogbox aligned to center	
+	$(window).resize(function () {
+		
+		//only do it if the dialog box is not hidden
+		if (!$('#confirm-dialog-box').is(':hidden')) popup();		
+	});	
+	
+	
+});
+
+//Popup dialog
+function popupConfirm(message) {
+		
+	// get the screen height and width  
+	var maskHeight = $(document).height();  
+	var maskWidth = $(window).width();
+	
+	// calculate the values for center alignment
+	var dialogTop =  (maskHeight/3) - ($('#confirm-dialog-box').height());  
+	var dialogLeft = (maskWidth/2) - ($('#confirm-dialog-box').width()/2); 
+	
+	// assign values to the overlay and dialog box
+	$('#confirm-dialog-overlay').css({height:maskHeight, width:maskWidth}).show();
+	$('#confirm-dialog-box').css({top:dialogTop, left:dialogLeft}).show();
+	
+	// display the message
+	$('#confirm-dialog-message').html(message);
+			
+}

@@ -1,5 +1,5 @@
 <%@page import="utils.modelUtils.UserUtil"%>
-<%@page language="java" contentType="text/html;charset=UTF-8"%>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.BreakingNew"%>
 <%@ page import="java.util.List"%>
 <%@ page import="utils.NewsParser"%>
@@ -20,6 +20,7 @@ function validateForm(){
 	document.getElementById("loader").setAttribute("style", "visibility:visible");
 	var email = $('#reciever').val();
 	var theme = $('#theme').val();
+	
 	var validate = true;
 	if(email.length == 0){
 		document.getElementById("error").setAttribute("style", "display:block");
@@ -45,7 +46,7 @@ function validateForm(){
 
 <div id=mailMain>
 	 
-	<form action="/itstock/sendMessage" method="post" class="basic-grey" onsubmit="return validateForm();">
+	<form  action="/itstock/sendMessage" method="post" class="basic-grey" onsubmit="return validateForm();">
 	<div id="error"  class="error" style="display:none">
      <p id="usernameMissing" style="display:none"><%=LanguageParsing.getValue("messaging.validate.usernameMissing") %></p>
      </div>

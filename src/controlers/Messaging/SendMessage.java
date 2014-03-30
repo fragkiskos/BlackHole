@@ -44,19 +44,17 @@ public class SendMessage extends HttpServlet {
 		String reciever = "";
 		String theme = "";
 		String text="";
-		
+		request.setCharacterEncoding("utf-8");
 		if(request.getParameter("reciever")!=null){
 			reciever = (String) request.getParameter("reciever");
 		}
 		if(request.getParameter("theme")!=null){
 			theme = (String) request.getParameter("theme");
-			byte[] b = theme.getBytes("UTF-8");
-			theme = new String(b);
+			System.out.println(theme);
 		}
 		if(request.getParameter("text")!=null){
 			text = (String) request.getParameter("text");
-			byte[] c = text.getBytes("UTF-8");
-			text = new String(c);
+			System.out.println(text);
 		}
 		User user = (User) request.getSession().getAttribute("user");
 		Date now = new Date();
