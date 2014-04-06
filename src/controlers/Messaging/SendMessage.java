@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Message;
 import model.User;
+import utils.LanguageParsing;
+import utils.Navigation;
 import utils.messageUtil.Messager;
 import utils.modelUtils.UserUtil;
 
@@ -41,27 +43,39 @@ public class SendMessage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String reciever = "";
-		String theme = "";
-		String text="";
-		request.setCharacterEncoding("utf-8");
-		if(request.getParameter("reciever")!=null){
-			reciever = (String) request.getParameter("reciever");
+		try{
+			String reciever = "";
+			String theme = "";
+			String text="";
+			request.setCharacterEncoding("utf-8");
+			if(request.getParameter("reciever")!=null){
+				reciever = (String) request.getParameter("reciever");
+			}
+			if(request.getParameter("theme")!=null){
+				theme = (String) request.getParameter("theme");
+				System.out.println(theme);
+			}
+			if(request.getParameter("text")!=null){
+				text = (String) request.getParameter("text");
+				System.out.println(text);
+			}
+			User user = (User) request.getSession().getAttribute("user");
+			Date now = new Date();
+			User recieverOb = UserUtil.getUserByUsername(reciever);
+			Message message = new Message(user.getId(), recieverOb.getId(), text, theme, now, false);
+			Messager.sendMessage(message);
+			Navigation.redirect(request, response, user.getId(), "messaging.send.successMessage", "success");
+			
+		}catch(Exception ex){
+			try{
+				User user = (User) request.getSession().getAttribute("user");
+				Navigation.redirect(request, response, user.getId(), "messaging.send.errorMessage", "error");
+				
+			}catch(Exception loginEx){
+				Navigation.logoutRedirect(request, response);
+			}
+			
 		}
-		if(request.getParameter("theme")!=null){
-			theme = (String) request.getParameter("theme");
-			System.out.println(theme);
-		}
-		if(request.getParameter("text")!=null){
-			text = (String) request.getParameter("text");
-			System.out.println(text);
-		}
-		User user = (User) request.getSession().getAttribute("user");
-		Date now = new Date();
-		User recieverOb = UserUtil.getUserByUsername(reciever);
-		Message message = new Message(user.getId(), recieverOb.getId(), text, theme, now, false);
-		Messager.sendMessage(message);
-		response.sendRedirect("getIncoming?userId="+user.getId());
 	}
 
 }

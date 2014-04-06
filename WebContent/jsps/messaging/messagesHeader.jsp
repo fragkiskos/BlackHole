@@ -7,7 +7,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
- 
+ <div id="sessionMessage" class="sessionMessage" style="top:-150px;visibility:hidden">
+	
+	</div>
     
     
          
@@ -52,19 +54,32 @@
     	 long userId = user.getId();%>
     
 	  <script type="text/javascript" charset="utf-8">
-	
+	  var timeout;
 		$(document).ready(function() {
+			
+			
 			getUnreaded(<%=userId%>);
 			$('div.photo a').fancyZoom({directory: 'images/zoom', scaleImg: true, closeOnClick: true});
 			if(<%=userId%>!=null){
+				setInterval(function(){
+					getUnreaded(<%=userId%>); // method to be executed;
+		        	    },3000);
+				setInterval(function(){
+					getUnreadedNotifications(<%=userId%>); // method to be executed;
+		        	    },3000);
+				}
 			
-			}   
+			
+			 message = '<%=session.getAttribute("sessionMessage")%>';
+			 messageClass = '<%=session.getAttribute("sessionMessageClass")%>';
+			showMessage(message,messageClass);
 		});
+		
 	</script>
-	
+	<script type="text/javascript" src="../../js/sessionMessage.js"></script> 
     <% if(logedIn){ %>
    
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="profile.jsp" class="username"> <%=user.getUsername() %>&nbsp;</a>
         <span class="noti_Container">
         <a href="../../getIncoming?userId=<%=user.getId()%>">
@@ -73,8 +88,10 @@
         </a>
         </span>
         <span class="noti_Container">
+        <a href="../../getNotifications?userId=<%=user.getId()%>">
         <img src="../../images/menu/notifications.png" class="menuIcon" title="notifications"/>
-        <span id="asdad" class="noti_bubble"></span>
+        <span id="noti" class="noti_bubble" style="visibility:hidden"></span>
+        </a>
         </span>
        <a href="/itstock/logout"> <img src="../../images/menu/exit.png" class="menuIcon" title="logout" /></a>
         <%}
@@ -119,6 +136,9 @@
 					<li><a href="../login.jsp"><%=LanguageParsing.getValue("login") %></a></li>
 				</ul>
 			</div>
+			<% session.removeAttribute("sessionMessage");
+			session.removeAttribute("sessionMessageClass");
+			%>
 			<!-- /menu -->
 			<!-- pitch -->
 			<div id="mailPitch">

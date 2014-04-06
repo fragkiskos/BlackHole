@@ -28,7 +28,7 @@ function validateForm(){
 		validate = false;
 	}
 	
-
+	
 	document.getElementById("loader").setAttribute("style", "visibility:hidden");
 	return validate;
 }

@@ -1,31 +1,30 @@
 package controlers.Messaging;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
-import utils.dbUtils.Pagination;
-import utils.messageUtil.Messager;
+import model.Notification;
+import model.User;
+import utils.Navigation;
+import utils.dbUtils.DbTransactions;
 
 /**
- * Servlet implementation class GetIncoming
+ * Servlet implementation class DeleteNotification
  */
-@WebServlet("/getIncomingCount")
-public class GetIncomingCount extends HttpServlet {
+@WebServlet("/deleteNotification")
+public class DeleteNotification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetIncomingCount() {
+    public DeleteNotification() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +34,15 @@ public class GetIncomingCount extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String param =  request.getParameter("userId");
-		
-		if(param!=null){
-			Long userId = Long.parseLong(param);
-			int count = Messager.getIncomingUnReadedCount(userId);
-			response.getWriter().print(count);
+		String param1 = request.getParameter("notificationId");
+		try{
+			User user = (User) request.getSession().getAttribute("user");
+			long notId = Long.parseLong(param1);
+			DbTransactions.deleteObjectById(Notification.class.getCanonicalName(), notId);
+			Navigation.redirectNotifications(request, response, user.getId(), "notifications.delete.successMessage", "success");
+		}catch(Exception ex){
+			Navigation.logoutRedirect(request, response);
 		}
-		
-		
-		
-	    
-		
 	}
 
 	/**
@@ -58,4 +53,3 @@ public class GetIncomingCount extends HttpServlet {
 	}
 
 }
-

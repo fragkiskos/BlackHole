@@ -3,7 +3,6 @@ package controlers.Messaging;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Notification;
+import utils.dbUtils.DbTransactions;
 import utils.dbUtils.Pagination;
 import utils.messageUtil.Messager;
 
 /**
- * Servlet implementation class GetIncoming
+ * Servlet implementation class GetNotifications
  */
-@WebServlet("/getIncoming")
-public class GetIncoming extends HttpServlet {
+@WebServlet("/getNotifications")
+public class GetNotifications extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetIncoming() {
+    public GetNotifications() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +33,7 @@ public class GetIncoming extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int start = 0;
 		int end = 10;
@@ -57,30 +58,36 @@ public class GetIncoming extends HttpServlet {
 		}
 		try{
 			Long userId = Long.parseLong(param);
-			List<model.Message> allMessages = Messager.getIncoming(userId);
-			List<model.Message> messages;
-			if(allMessages.size()>10){
-				 messages =  Messager.getIncoming(userId).subList(start, end);
-			}else{
-				 messages = allMessages;
-			}
+			List<model.Notification> allNotifications = Messager.getNotifications(userId);
 			
+			List<model.Notification> notifications;
+			if(allNotifications.size()>10){
+				 notifications =  Messager.getNotifications(userId).subList(start, end);
+			}else{
+				notifications = allNotifications;
+			}
+			if(notifications.size()>0){
+				for(int i=0;i<notifications.size();i++){
+					Notification not = notifications.get(i);
+					not.setReaded(true);
+					DbTransactions.updateObject(not);
+				}
+			}
 			HttpSession session = request.getSession(false);
-			session.setAttribute("messages", messages);
-			session.setAttribute("kind", "Incoming");
-			session.setAttribute("messagesCount", allMessages.size());
+			session.setAttribute("notifications", notifications);
+			session.setAttribute("notificationsCount", allNotifications.size());
 			session.setAttribute("start", start);
 			session.setAttribute("end", end);
 			session.setAttribute("hasPrevious", Pagination.hasPrevious(start));
-			session.setAttribute("hasNext", Pagination.hasNext(end, allMessages.size()));
-			if(Pagination.hasNext(end, allMessages.size())){
-				session.setAttribute("next", Pagination.getPaginationNext(start, end, allMessages.size()));
+			session.setAttribute("hasNext", Pagination.hasNext(end, allNotifications.size()));
+			if(Pagination.hasNext(end, allNotifications.size())){
+				session.setAttribute("next", Pagination.getPaginationNext(start, end, allNotifications.size()));
 			} 
 			if(Pagination.hasPrevious(start)){
 				session.setAttribute("previous", Pagination.getPaginationPrevious(start));
 			}
 			
-			response.sendRedirect("jsps/messaging/messages.jsp");
+			response.sendRedirect("jsps/messaging/notifications.jsp");
 		}catch(Exception ex){
 			response.sendRedirect("jsps/index.jsp");
 		}

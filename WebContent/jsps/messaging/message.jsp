@@ -55,7 +55,7 @@ String kind = (String)session.getAttribute("kind");
 
 function reply(){
 	var textarea = document.getElementById("msgBody").innerHTML;
-	$("#sender").attr("readonly", false);
+	
 	var sender = document.getElementById("sender").getAttribute("value");
 	document.getElementById("senderLabel").innerHTML='<%=LanguageParsing.getValue("messaging.reciever")+":" %>';
 	document.getElementById("msgBody").innerHTML="";

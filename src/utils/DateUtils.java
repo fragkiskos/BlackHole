@@ -9,6 +9,6 @@ public class DateUtils{
 		Date dte = date;//or something else
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		String formattedDate = formatter.format(dte);
-		return formattedDate;
+		return formattedDate;    
 	}
-}
+}  
