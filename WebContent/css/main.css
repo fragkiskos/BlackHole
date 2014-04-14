@@ -539,12 +539,12 @@ background-image: url('error.png');
 	
 }
 .notification{
-	border-style: solid;
+	border-style: dashed;
 	padding:1px;
 	border-radius:10px;
 	margin:5px;
-	border-color:#000066;
-	border-width:1px;
+	border-color:black;
+	border-width:0.1px;
 }
 
 
@@ -600,6 +600,7 @@ span.next-previous:HOVER {
 div.sessionMessagesuccess{
 	background-color: #33FF00;
 	border-radius:10px;
+	
 	width: 200px;
 	padding: 10px 10px 10px 10px;
 	position:absolute;    /* This breaks the div from the normal HTML document. */

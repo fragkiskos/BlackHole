@@ -79,9 +79,9 @@ function controlDelete(id){
 			<%for(int i=0;i<notifications.size();i++){ %>
 			<div class="notification-container">
 			<div class="notification">
-			<p style="color:blue;"><%=DateUtils.getEuropeDate(notifications.get(i).getDate()) %></p>
+			<p style="color:#202020;"><%=DateUtils.getEuropeDate(notifications.get(i).getDate()) %></p>
 			<p style="margin:20px"><%=notifications.get(i).getText() %> </p>
-			<a     onclick="controlDelete('<%= notifications.get(i).getId()%>');"><img class="deleteIcon" src="../../images/delete.png" width="15px" title="delete"/></a>
+			<a  href="#confirm-dialog-overlay"   onclick="controlDelete('<%= notifications.get(i).getId()%>');"><img class="deleteIcon" src="../../images/delete.png" width="15px" title="delete"/></a>
 			</div> 
 			</div>
 			<%} %>
